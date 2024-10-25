@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sains</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            display: flex;
+    min-height: 100vh;
+    background: url('P7abs.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+        .calculator {
+            width: 400px;
+            padding: 25px;
+            background-color: #000367;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            width: 95%;
+            height: 45px;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            border: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            height: 45px;
+            font-size: 18px;
+            border: none;
+            background-color: #13d185;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button.scientific {
+            background-color: #ff5722;
+        }
+
+        button.scientific:hover {
+            background-color: #e64a19;
+        }
+
+        button.clear, button.equals {
+            background-color: #f44336;
+        }
+
+        button.clear:hover, button.equals:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" class="display" id="display" disabled>
+    <div class="keys">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="deleteLast()">DEL</button>
+        <button onclick="appendToDisplay('(')">(</button>
+        <button onclick="appendToDisplay(')')">)</button>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('/')">/</button>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('*')">*</button>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('-')">-</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button onclick="appendToDisplay('+')">+</button>
+        <button class="equals" onclick="calculate()">=</button>
+        <button class="scientific" onclick="appendToDisplay('Math.sin(')">sin</button>
+        <button class="scientific" onclick="appendToDisplay('Math.cos(')">cos</button>
+        <button class="scientific" onclick="appendToDisplay('Math.tan(')">tan</button>
+        <button class="scientific" onclick="appendToDisplay('Math.log(')">log</button>
+        <button class="scientific" onclick="appendToDisplay('Math.sqrt(')">√</button>
+        <button class="scientific" onclick="appendToDisplay('Math.pow(')">x^y</button>
+        <button class="scientific" onclick="appendToDisplay('Math.PI')">π</button>
+        <button class="scientific" onclick="appendToDisplay('Math.E')">e</button>
+    </div>
+</div>
+
+<script>
+    //Menambahkan nilai ke display
+    function appendToDisplay(value) {
+        document.getElementById('display').value += value;
+    }
+
+    //Membersihkan display
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+
+    //Menghapus Karakter Terakhir
+    function deleteLast() {
+        let display = document.getElementById('display').value;
+        document.getElementById('display').value = display.slice(0, -1);
+    }
+
+    //Menghitung Hasil
+    function calculate() {
+        try {
+            let result = eval(document.getElementById('display').value);
+            document.getElementById('display').value = result;
+        } catch (error) {
+            alert('Input tidak valid');
+        }
+    }
+</script>
+
+</body>
+</html>
